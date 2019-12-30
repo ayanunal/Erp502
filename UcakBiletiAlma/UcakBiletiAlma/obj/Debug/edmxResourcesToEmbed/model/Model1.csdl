@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UcakBiletiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="UcakBiletiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblHavalimanis" EntityType="UcakBiletiModel.tblHavalimani" />
+    <EntitySet Name="tblOnays" EntityType="UcakBiletiModel.tblOnay" />
+    <EntitySet Name="tblRezerves" EntityType="UcakBiletiModel.tblRezerve" />
+    <EntitySet Name="tblSinifs" EntityType="UcakBiletiModel.tblSinif" />
+    <EntitySet Name="tblUcrets" EntityType="UcakBiletiModel.tblUcret" />
+    <EntitySet Name="UcusKodus" EntityType="UcakBiletiModel.UcusKodu" />
+    <AssociationSet Name="FK_tblOnay_tblSinif" Association="UcakBiletiModel.FK_tblOnay_tblSinif">
+      <End Role="tblSinif" EntitySet="tblSinifs" />
+      <End Role="tblOnay" EntitySet="tblOnays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRezerve_tblSinif" Association="UcakBiletiModel.FK_tblRezerve_tblSinif">
+      <End Role="tblSinif" EntitySet="tblSinifs" />
+      <End Role="tblRezerve" EntitySet="tblRezerves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUcret_tblSinif" Association="UcakBiletiModel.FK_tblUcret_tblSinif">
+      <End Role="tblSinif" EntitySet="tblSinifs" />
+      <End Role="tblUcret" EntitySet="tblUcrets" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblHavalimani">
+    <Key>
+      <PropertyRef Name="il_no" />
+    </Key>
+    <Property Name="il_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="havalimaniAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblOnay">
+    <Key>
+      <PropertyRef Name="OnayId" />
+    </Key>
+    <Property Name="OnayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nereden" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nereye" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GidisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="DonusTarihi" Type="DateTime" Precision="0" />
+    <Property Name="SaatId" Type="Int32" />
+    <Property Name="MusAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TcNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SinifId" Type="Int32" />
+    <Property Name="KoltukNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UcretId" Type="Int32" />
+    <Property Name="DogumTarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblSinif" Relationship="UcakBiletiModel.FK_tblOnay_tblSinif" FromRole="tblOnay" ToRole="tblSinif" />
+  </EntityType>
+  <EntityType Name="tblRezerve">
+    <Key>
+      <PropertyRef Name="RezerveId" />
+    </Key>
+    <Property Name="RezerveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nereden" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nereye" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GidisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="DonusTarihi" Type="DateTime" Precision="0" />
+    <Property Name="SaatId" Type="Int32" />
+    <Property Name="MusAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="TcNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SinifId" Type="Int32" />
+    <Property Name="KoltukNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DogumTarih" Type="DateTime" Precision="0" />
+    <Property Name="UcretId" Type="Int32" />
+    <NavigationProperty Name="tblSinif" Relationship="UcakBiletiModel.FK_tblRezerve_tblSinif" FromRole="tblRezerve" ToRole="tblSinif" />
+  </EntityType>
+  <EntityType Name="tblSinif">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sinif" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblOnays" Relationship="UcakBiletiModel.FK_tblOnay_tblSinif" FromRole="tblSinif" ToRole="tblOnay" />
+    <NavigationProperty Name="tblRezerves" Relationship="UcakBiletiModel.FK_tblRezerve_tblSinif" FromRole="tblSinif" ToRole="tblRezerve" />
+    <NavigationProperty Name="tblUcrets" Relationship="UcakBiletiModel.FK_tblUcret_tblSinif" FromRole="tblSinif" ToRole="tblUcret" />
+  </EntityType>
+  <EntityType Name="tblUcret">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ucret" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SinifId" Type="Int32" />
+    <NavigationProperty Name="tblSinif" Relationship="UcakBiletiModel.FK_tblUcret_tblSinif" FromRole="tblUcret" ToRole="tblSinif" />
+  </EntityType>
+  <EntityType Name="UcusKodu">
+    <Key>
+      <PropertyRef Name="UcusId" />
+    </Key>
+    <Property Name="UcusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UcusKodu1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KalkisHavId" Type="Int32" />
+    <Property Name="KalkisSaat" Type="Time" Precision="7" />
+    <Property Name="VarisHavId" Type="Int32" />
+    <Property Name="VarisSaat" Type="Time" Precision="7" />
+    <Property Name="KalkisTarih" Type="DateTime" Precision="0" />
+    <Property Name="VarisTarih" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_tblOnay_tblSinif">
+    <End Type="UcakBiletiModel.tblSinif" Role="tblSinif" Multiplicity="0..1" />
+    <End Type="UcakBiletiModel.tblOnay" Role="tblOnay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSinif">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblOnay">
+        <PropertyRef Name="SinifId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRezerve_tblSinif">
+    <End Type="UcakBiletiModel.tblSinif" Role="tblSinif" Multiplicity="0..1" />
+    <End Type="UcakBiletiModel.tblRezerve" Role="tblRezerve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSinif">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblRezerve">
+        <PropertyRef Name="SinifId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUcret_tblSinif">
+    <End Type="UcakBiletiModel.tblSinif" Role="tblSinif" Multiplicity="0..1" />
+    <End Type="UcakBiletiModel.tblUcret" Role="tblUcret" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSinif">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblUcret">
+        <PropertyRef Name="SinifId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

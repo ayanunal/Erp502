@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UcakBiletiModelStoreContainer" CdmEntityContainer="UcakBiletiEntities">
+    <EntitySetMapping Name="tblHavalimanis">
+      <EntityTypeMapping TypeName="UcakBiletiModel.tblHavalimani">
+        <MappingFragment StoreEntitySet="tblHavalimani">
+          <ScalarProperty Name="havalimaniAdi" ColumnName="havalimaniAdi" />
+          <ScalarProperty Name="il_no" ColumnName="il_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOnays">
+      <EntityTypeMapping TypeName="UcakBiletiModel.tblOnay">
+        <MappingFragment StoreEntitySet="tblOnay">
+          <ScalarProperty Name="DogumTarih" ColumnName="DogumTarih" />
+          <ScalarProperty Name="UcretId" ColumnName="UcretId" />
+          <ScalarProperty Name="KoltukNo" ColumnName="KoltukNo" />
+          <ScalarProperty Name="SinifId" ColumnName="SinifId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+          <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="MusAdiSoyadi" ColumnName="MusAdiSoyadi" />
+          <ScalarProperty Name="SaatId" ColumnName="SaatId" />
+          <ScalarProperty Name="DonusTarihi" ColumnName="DonusTarihi" />
+          <ScalarProperty Name="GidisTarihi" ColumnName="GidisTarihi" />
+          <ScalarProperty Name="Nereye" ColumnName="Nereye" />
+          <ScalarProperty Name="Nereden" ColumnName="Nereden" />
+          <ScalarProperty Name="OnayId" ColumnName="OnayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRezerves">
+      <EntityTypeMapping TypeName="UcakBiletiModel.tblRezerve">
+        <MappingFragment StoreEntitySet="tblRezerve">
+          <ScalarProperty Name="UcretId" ColumnName="UcretId" />
+          <ScalarProperty Name="DogumTarih" ColumnName="DogumTarih" />
+          <ScalarProperty Name="KoltukNo" ColumnName="KoltukNo" />
+          <ScalarProperty Name="SinifId" ColumnName="SinifId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+          <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="MusAdiSoyadi" ColumnName="MusAdiSoyadi" />
+          <ScalarProperty Name="SaatId" ColumnName="SaatId" />
+          <ScalarProperty Name="DonusTarihi" ColumnName="DonusTarihi" />
+          <ScalarProperty Name="GidisTarihi" ColumnName="GidisTarihi" />
+          <ScalarProperty Name="Nereye" ColumnName="Nereye" />
+          <ScalarProperty Name="Nereden" ColumnName="Nereden" />
+          <ScalarProperty Name="RezerveId" ColumnName="RezerveId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSinifs">
+      <EntityTypeMapping TypeName="UcakBiletiModel.tblSinif">
+        <MappingFragment StoreEntitySet="tblSinif">
+          <ScalarProperty Name="Sinif" ColumnName="Sinif" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUcrets">
+      <EntityTypeMapping TypeName="UcakBiletiModel.tblUcret">
+        <MappingFragment StoreEntitySet="tblUcret">
+          <ScalarProperty Name="SinifId" ColumnName="SinifId" />
+          <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UcusKodus">
+      <EntityTypeMapping TypeName="UcakBiletiModel.UcusKodu">
+        <MappingFragment StoreEntitySet="UcusKodu">
+          <ScalarProperty Name="VarisTarih" ColumnName="VarisTarih" />
+          <ScalarProperty Name="KalkisTarih" ColumnName="KalkisTarih" />
+          <ScalarProperty Name="VarisSaat" ColumnName="VarisSaat" />
+          <ScalarProperty Name="VarisHavId" ColumnName="VarisHavId" />
+          <ScalarProperty Name="KalkisSaat" ColumnName="KalkisSaat" />
+          <ScalarProperty Name="KalkisHavId" ColumnName="KalkisHavId" />
+          <ScalarProperty Name="UcusKodu1" ColumnName="UcusKodu" />
+          <ScalarProperty Name="UcusId" ColumnName="UcusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

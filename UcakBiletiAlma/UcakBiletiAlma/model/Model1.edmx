@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UcakBiletiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblHavalimani">
+          <Key>
+            <PropertyRef Name="il_no" />
+          </Key>
+          <Property Name="il_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="havalimaniAdi" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblOnay">
+          <Key>
+            <PropertyRef Name="OnayId" />
+          </Key>
+          <Property Name="OnayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nereden" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nereye" Type="nvarchar" MaxLength="50" />
+          <Property Name="GidisTarihi" Type="date" />
+          <Property Name="DonusTarihi" Type="date" />
+          <Property Name="SaatId" Type="int" />
+          <Property Name="MusAdiSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="TcNo" Type="nvarchar" MaxLength="11" />
+          <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SinifId" Type="int" />
+          <Property Name="KoltukNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="UcretId" Type="int" />
+          <Property Name="DogumTarih" Type="date" />
+        </EntityType>
+        <EntityType Name="tblRezerve">
+          <Key>
+            <PropertyRef Name="RezerveId" />
+          </Key>
+          <Property Name="RezerveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nereden" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nereye" Type="nvarchar" MaxLength="50" />
+          <Property Name="GidisTarihi" Type="date" />
+          <Property Name="DonusTarihi" Type="date" />
+          <Property Name="SaatId" Type="int" />
+          <Property Name="MusAdiSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="TcNo" Type="nvarchar" MaxLength="11" />
+          <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SinifId" Type="int" />
+          <Property Name="KoltukNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DogumTarih" Type="date" />
+          <Property Name="UcretId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSinif">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sinif" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblUcret">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ucret" Type="nvarchar" MaxLength="50" />
+          <Property Name="SinifId" Type="int" />
+        </EntityType>
+        <EntityType Name="UcusKodu">
+          <Key>
+            <PropertyRef Name="UcusId" />
+          </Key>
+          <Property Name="UcusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UcusKodu" Type="nvarchar" MaxLength="50" />
+          <Property Name="KalkisHavId" Type="int" />
+          <Property Name="KalkisSaat" Type="time" Precision="7" />
+          <Property Name="VarisHavId" Type="int" />
+          <Property Name="VarisSaat" Type="time" Precision="7" />
+          <Property Name="KalkisTarih" Type="date" />
+          <Property Name="VarisTarih" Type="date" />
+        </EntityType>
+        <Association Name="FK_tblOnay_tblSinif">
+          <End Role="tblSinif" Type="Self.tblSinif" Multiplicity="0..1" />
+          <End Role="tblOnay" Type="Self.tblOnay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSinif">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOnay">
+              <PropertyRef Name="SinifId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRezerve_tblSinif">
+          <End Role="tblSinif" Type="Self.tblSinif" Multiplicity="0..1" />
+          <End Role="tblRezerve" Type="Self.tblRezerve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSinif">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRezerve">
+              <PropertyRef Name="SinifId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUcret_tblSinif">
+          <End Role="tblSinif" Type="Self.tblSinif" Multiplicity="0..1" />
+          <End Role="tblUcret" Type="Self.tblUcret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSinif">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUcret">
+              <PropertyRef Name="SinifId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UcakBiletiModelStoreContainer">
+          <EntitySet Name="tblHavalimani" EntityType="Self.tblHavalimani" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOnay" EntityType="Self.tblOnay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRezerve" EntityType="Self.tblRezerve" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSinif" EntityType="Self.tblSinif" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUcret" EntityType="Self.tblUcret" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UcusKodu" EntityType="Self.UcusKodu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblOnay_tblSinif" Association="Self.FK_tblOnay_tblSinif">
+            <End Role="tblSinif" EntitySet="tblSinif" />
+            <End Role="tblOnay" EntitySet="tblOnay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRezerve_tblSinif" Association="Self.FK_tblRezerve_tblSinif">
+            <End Role="tblSinif" EntitySet="tblSinif" />
+            <End Role="tblRezerve" EntitySet="tblRezerve" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUcret_tblSinif" Association="Self.FK_tblUcret_tblSinif">
+            <End Role="tblSinif" EntitySet="tblSinif" />
+            <End Role="tblUcret" EntitySet="tblUcret" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UcakBiletiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UcakBiletiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblHavalimanis" EntityType="UcakBiletiModel.tblHavalimani" />
+          <EntitySet Name="tblOnays" EntityType="UcakBiletiModel.tblOnay" />
+          <EntitySet Name="tblRezerves" EntityType="UcakBiletiModel.tblRezerve" />
+          <EntitySet Name="tblSinifs" EntityType="UcakBiletiModel.tblSinif" />
+          <EntitySet Name="tblUcrets" EntityType="UcakBiletiModel.tblUcret" />
+          <EntitySet Name="UcusKodus" EntityType="UcakBiletiModel.UcusKodu" />
+          <AssociationSet Name="FK_tblOnay_tblSinif" Association="UcakBiletiModel.FK_tblOnay_tblSinif">
+            <End Role="tblSinif" EntitySet="tblSinifs" />
+            <End Role="tblOnay" EntitySet="tblOnays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRezerve_tblSinif" Association="UcakBiletiModel.FK_tblRezerve_tblSinif">
+            <End Role="tblSinif" EntitySet="tblSinifs" />
+            <End Role="tblRezerve" EntitySet="tblRezerves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUcret_tblSinif" Association="UcakBiletiModel.FK_tblUcret_tblSinif">
+            <End Role="tblSinif" EntitySet="tblSinifs" />
+            <End Role="tblUcret" EntitySet="tblUcrets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblHavalimani">
+          <Key>
+            <PropertyRef Name="il_no" />
+          </Key>
+          <Property Name="il_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="havalimaniAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblOnay">
+          <Key>
+            <PropertyRef Name="OnayId" />
+          </Key>
+          <Property Name="OnayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nereden" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nereye" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GidisTarihi" Type="DateTime" Precision="0" />
+          <Property Name="DonusTarihi" Type="DateTime" Precision="0" />
+          <Property Name="SaatId" Type="Int32" />
+          <Property Name="MusAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TcNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SinifId" Type="Int32" />
+          <Property Name="KoltukNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UcretId" Type="Int32" />
+          <Property Name="DogumTarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblSinif" Relationship="UcakBiletiModel.FK_tblOnay_tblSinif" FromRole="tblOnay" ToRole="tblSinif" />
+        </EntityType>
+        <EntityType Name="tblRezerve">
+          <Key>
+            <PropertyRef Name="RezerveId" />
+          </Key>
+          <Property Name="RezerveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nereden" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nereye" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GidisTarihi" Type="DateTime" Precision="0" />
+          <Property Name="DonusTarihi" Type="DateTime" Precision="0" />
+          <Property Name="SaatId" Type="Int32" />
+          <Property Name="MusAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TcNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SinifId" Type="Int32" />
+          <Property Name="KoltukNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DogumTarih" Type="DateTime" Precision="0" />
+          <Property Name="UcretId" Type="Int32" />
+          <NavigationProperty Name="tblSinif" Relationship="UcakBiletiModel.FK_tblRezerve_tblSinif" FromRole="tblRezerve" ToRole="tblSinif" />
+        </EntityType>
+        <EntityType Name="tblSinif">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sinif" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblOnays" Relationship="UcakBiletiModel.FK_tblOnay_tblSinif" FromRole="tblSinif" ToRole="tblOnay" />
+          <NavigationProperty Name="tblRezerves" Relationship="UcakBiletiModel.FK_tblRezerve_tblSinif" FromRole="tblSinif" ToRole="tblRezerve" />
+          <NavigationProperty Name="tblUcrets" Relationship="UcakBiletiModel.FK_tblUcret_tblSinif" FromRole="tblSinif" ToRole="tblUcret" />
+        </EntityType>
+        <EntityType Name="tblUcret">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ucret" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SinifId" Type="Int32" />
+          <NavigationProperty Name="tblSinif" Relationship="UcakBiletiModel.FK_tblUcret_tblSinif" FromRole="tblUcret" ToRole="tblSinif" />
+        </EntityType>
+        <EntityType Name="UcusKodu">
+          <Key>
+            <PropertyRef Name="UcusId" />
+          </Key>
+          <Property Name="UcusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UcusKodu1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KalkisHavId" Type="Int32" />
+          <Property Name="KalkisSaat" Type="Time" Precision="7" />
+          <Property Name="VarisHavId" Type="Int32" />
+          <Property Name="VarisSaat" Type="Time" Precision="7" />
+          <Property Name="KalkisTarih" Type="DateTime" Precision="0" />
+          <Property Name="VarisTarih" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_tblOnay_tblSinif">
+          <End Type="UcakBiletiModel.tblSinif" Role="tblSinif" Multiplicity="0..1" />
+          <End Type="UcakBiletiModel.tblOnay" Role="tblOnay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSinif">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOnay">
+              <PropertyRef Name="SinifId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRezerve_tblSinif">
+          <End Type="UcakBiletiModel.tblSinif" Role="tblSinif" Multiplicity="0..1" />
+          <End Type="UcakBiletiModel.tblRezerve" Role="tblRezerve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSinif">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRezerve">
+              <PropertyRef Name="SinifId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUcret_tblSinif">
+          <End Type="UcakBiletiModel.tblSinif" Role="tblSinif" Multiplicity="0..1" />
+          <End Type="UcakBiletiModel.tblUcret" Role="tblUcret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSinif">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUcret">
+              <PropertyRef Name="SinifId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UcakBiletiModelStoreContainer" CdmEntityContainer="UcakBiletiEntities">
+          <EntitySetMapping Name="tblHavalimanis">
+            <EntityTypeMapping TypeName="UcakBiletiModel.tblHavalimani">
+              <MappingFragment StoreEntitySet="tblHavalimani">
+                <ScalarProperty Name="havalimaniAdi" ColumnName="havalimaniAdi" />
+                <ScalarProperty Name="il_no" ColumnName="il_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOnays">
+            <EntityTypeMapping TypeName="UcakBiletiModel.tblOnay">
+              <MappingFragment StoreEntitySet="tblOnay">
+                <ScalarProperty Name="DogumTarih" ColumnName="DogumTarih" />
+                <ScalarProperty Name="UcretId" ColumnName="UcretId" />
+                <ScalarProperty Name="KoltukNo" ColumnName="KoltukNo" />
+                <ScalarProperty Name="SinifId" ColumnName="SinifId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="MusAdiSoyadi" ColumnName="MusAdiSoyadi" />
+                <ScalarProperty Name="SaatId" ColumnName="SaatId" />
+                <ScalarProperty Name="DonusTarihi" ColumnName="DonusTarihi" />
+                <ScalarProperty Name="GidisTarihi" ColumnName="GidisTarihi" />
+                <ScalarProperty Name="Nereye" ColumnName="Nereye" />
+                <ScalarProperty Name="Nereden" ColumnName="Nereden" />
+                <ScalarProperty Name="OnayId" ColumnName="OnayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRezerves">
+            <EntityTypeMapping TypeName="UcakBiletiModel.tblRezerve">
+              <MappingFragment StoreEntitySet="tblRezerve">
+                <ScalarProperty Name="UcretId" ColumnName="UcretId" />
+                <ScalarProperty Name="DogumTarih" ColumnName="DogumTarih" />
+                <ScalarProperty Name="KoltukNo" ColumnName="KoltukNo" />
+                <ScalarProperty Name="SinifId" ColumnName="SinifId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="MusAdiSoyadi" ColumnName="MusAdiSoyadi" />
+                <ScalarProperty Name="SaatId" ColumnName="SaatId" />
+                <ScalarProperty Name="DonusTarihi" ColumnName="DonusTarihi" />
+                <ScalarProperty Name="GidisTarihi" ColumnName="GidisTarihi" />
+                <ScalarProperty Name="Nereye" ColumnName="Nereye" />
+                <ScalarProperty Name="Nereden" ColumnName="Nereden" />
+                <ScalarProperty Name="RezerveId" ColumnName="RezerveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSinifs">
+            <EntityTypeMapping TypeName="UcakBiletiModel.tblSinif">
+              <MappingFragment StoreEntitySet="tblSinif">
+                <ScalarProperty Name="Sinif" ColumnName="Sinif" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUcrets">
+            <EntityTypeMapping TypeName="UcakBiletiModel.tblUcret">
+              <MappingFragment StoreEntitySet="tblUcret">
+                <ScalarProperty Name="SinifId" ColumnName="SinifId" />
+                <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UcusKodus">
+            <EntityTypeMapping TypeName="UcakBiletiModel.UcusKodu">
+              <MappingFragment StoreEntitySet="UcusKodu">
+                <ScalarProperty Name="VarisTarih" ColumnName="VarisTarih" />
+                <ScalarProperty Name="KalkisTarih" ColumnName="KalkisTarih" />
+                <ScalarProperty Name="VarisSaat" ColumnName="VarisSaat" />
+                <ScalarProperty Name="VarisHavId" ColumnName="VarisHavId" />
+                <ScalarProperty Name="KalkisSaat" ColumnName="KalkisSaat" />
+                <ScalarProperty Name="KalkisHavId" ColumnName="KalkisHavId" />
+                <ScalarProperty Name="UcusKodu1" ColumnName="UcusKodu" />
+                <ScalarProperty Name="UcusId" ColumnName="UcusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

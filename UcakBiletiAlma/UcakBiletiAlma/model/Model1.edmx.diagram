@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3bc944075334429a8fb19923cb25017" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="UcakBiletiModel.tblHavalimani" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UcakBiletiModel.tblOnay" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="UcakBiletiModel.tblRezerve" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="UcakBiletiModel.tblSinif" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="UcakBiletiModel.tblUcret" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="UcakBiletiModel.UcusKodu" Width="1.5" PointX="5.75" PointY="3.75" />
+        <AssociationConnector Association="UcakBiletiModel.FK_tblOnay_tblSinif" />
+        <AssociationConnector Association="UcakBiletiModel.FK_tblRezerve_tblSinif" />
+        <AssociationConnector Association="UcakBiletiModel.FK_tblUcret_tblSinif" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

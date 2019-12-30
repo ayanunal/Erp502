@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UcakBiletiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblHavalimani">
+    <Key>
+      <PropertyRef Name="il_no" />
+    </Key>
+    <Property Name="il_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="havalimaniAdi" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblOnay">
+    <Key>
+      <PropertyRef Name="OnayId" />
+    </Key>
+    <Property Name="OnayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nereden" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nereye" Type="nvarchar" MaxLength="50" />
+    <Property Name="GidisTarihi" Type="date" />
+    <Property Name="DonusTarihi" Type="date" />
+    <Property Name="SaatId" Type="int" />
+    <Property Name="MusAdiSoyadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="TcNo" Type="nvarchar" MaxLength="11" />
+    <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="SinifId" Type="int" />
+    <Property Name="KoltukNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="UcretId" Type="int" />
+    <Property Name="DogumTarih" Type="date" />
+  </EntityType>
+  <EntityType Name="tblRezerve">
+    <Key>
+      <PropertyRef Name="RezerveId" />
+    </Key>
+    <Property Name="RezerveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nereden" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nereye" Type="nvarchar" MaxLength="50" />
+    <Property Name="GidisTarihi" Type="date" />
+    <Property Name="DonusTarihi" Type="date" />
+    <Property Name="SaatId" Type="int" />
+    <Property Name="MusAdiSoyadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="15" />
+    <Property Name="TcNo" Type="nvarchar" MaxLength="11" />
+    <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="SinifId" Type="int" />
+    <Property Name="KoltukNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="DogumTarih" Type="date" />
+    <Property Name="UcretId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblSinif">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sinif" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblUcret">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ucret" Type="nvarchar" MaxLength="50" />
+    <Property Name="SinifId" Type="int" />
+  </EntityType>
+  <EntityType Name="UcusKodu">
+    <Key>
+      <PropertyRef Name="UcusId" />
+    </Key>
+    <Property Name="UcusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UcusKodu" Type="nvarchar" MaxLength="50" />
+    <Property Name="KalkisHavId" Type="int" />
+    <Property Name="KalkisSaat" Type="time" Precision="7" />
+    <Property Name="VarisHavId" Type="int" />
+    <Property Name="VarisSaat" Type="time" Precision="7" />
+    <Property Name="KalkisTarih" Type="date" />
+    <Property Name="VarisTarih" Type="date" />
+  </EntityType>
+  <Association Name="FK_tblOnay_tblSinif">
+    <End Role="tblSinif" Type="Self.tblSinif" Multiplicity="0..1" />
+    <End Role="tblOnay" Type="Self.tblOnay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSinif">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblOnay">
+        <PropertyRef Name="SinifId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRezerve_tblSinif">
+    <End Role="tblSinif" Type="Self.tblSinif" Multiplicity="0..1" />
+    <End Role="tblRezerve" Type="Self.tblRezerve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSinif">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblRezerve">
+        <PropertyRef Name="SinifId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUcret_tblSinif">
+    <End Role="tblSinif" Type="Self.tblSinif" Multiplicity="0..1" />
+    <End Role="tblUcret" Type="Self.tblUcret" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSinif">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblUcret">
+        <PropertyRef Name="SinifId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UcakBiletiModelStoreContainer">
+    <EntitySet Name="tblHavalimani" EntityType="Self.tblHavalimani" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOnay" EntityType="Self.tblOnay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRezerve" EntityType="Self.tblRezerve" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSinif" EntityType="Self.tblSinif" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUcret" EntityType="Self.tblUcret" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UcusKodu" EntityType="Self.UcusKodu" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblOnay_tblSinif" Association="Self.FK_tblOnay_tblSinif">
+      <End Role="tblSinif" EntitySet="tblSinif" />
+      <End Role="tblOnay" EntitySet="tblOnay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRezerve_tblSinif" Association="Self.FK_tblRezerve_tblSinif">
+      <End Role="tblSinif" EntitySet="tblSinif" />
+      <End Role="tblRezerve" EntitySet="tblRezerve" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUcret_tblSinif" Association="Self.FK_tblUcret_tblSinif">
+      <End Role="tblSinif" EntitySet="tblSinif" />
+      <End Role="tblUcret" EntitySet="tblUcret" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
