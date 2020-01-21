@@ -54,9 +54,8 @@ namespace MyEverNote.BusinessLayer
                     Password = data.Password,
                     ActiveGuid = Guid.NewGuid(),
                     IsActive=false,
-                    IsAdmin=false
-                    
-                
+                    IsAdmin=false,
+                    ProfileImageFileName="userimg.jfif"
                 });
                 if(dbResult>0)
                 {
@@ -122,6 +121,43 @@ namespace MyEverNote.BusinessLayer
                 }
                 return res;
             }
+        }
+
+        public BusinessLayerResult<EverNoteUser> UpdateProfile(EverNoteUser user)
+        {
+            EverNoteUser db_user = repo_user.Find(x => x.Id != user.Id && (x.UserName == user.UserName || x.Email == user.Email));
+            BusinessLayerResult<EverNoteUser> res = new BusinessLayerResult<EverNoteUser>();
+            
+            if(db_user!=null && db_user.Id != user.Id)
+            {
+                if (db_user.UserName==user.UserName)
+                {
+                    res.AddError(ErrorMessageCode.UserNameAlreadyExist, "Bu kullanıcı daha önce oluşturulmuş.");
+                }
+
+                if (db_user.Email==user.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExist, "Bu e-posta daha önce kullanılmış.");
+                }
+                return res;
+            }
+
+            res.Result = repo_user.Find(x => x.Id == user.Id);
+            res.Result.Email = user.Email;
+            res.Result.Name = user.Name;
+            res.Result.Surname = user.Surname;
+            res.Result.Password = user.Password;
+            res.Result.UserName = user.UserName;
+            if (string.IsNullOrEmpty(user.ProfileImageFileName)==false)
+            {
+                res.Result.ProfileImageFileName = user.ProfileImageFileName;
+            }
+            if (repo_user.Update(res.Result)==0)
+            {
+                res.AddError(ErrorMessageCode.ProfileCouldNotUpdate, "Profil Güncellenemedi.");
+
+            }
+            return res;
         }
     }
 }

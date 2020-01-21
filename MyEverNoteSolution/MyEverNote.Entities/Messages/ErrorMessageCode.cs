@@ -17,5 +17,6 @@ namespace MyEverNote.Entities.Messages
         UserAlreadyActive = 154,
         ActivateIdDoesNotExist = 155,
         UserNotFound = 156,
+        ProfileCouldNotUpdate = 157,
     }
 }

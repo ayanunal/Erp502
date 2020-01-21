@@ -2,6 +2,7 @@
 using MyEverNote.Entities;
 using MyEverNote.Entities.Messages;
 using MyEverNote.Entities.ValueObject;
+using MyEverNote.WebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +90,14 @@ namespace MyEverNote.WebApp.Controllers
                     res.Errors.ForEach(x=>ModelState.AddModelError("", x.Message));
                     return View(model);
                 }
-                return RedirectToAction("RegisterOk");
+                //return RedirectToAction("RegisterOk");
+                OkViewModel notifyObjOk = new OkViewModel()
+                {
+                    Title = "Kayıt Başarılı",
+                    RedirectingUrl = "/Home/Login"
+                };
+                notifyObjOk.Items.Add("Lütfen E-Posta hesabına gönderdiğimiz aktivasyon link'ine tıklayarak aktive ediniz. Hesabınızı aktive etmeden not ekleyemez ve beğeni yapamazsınız.");
+                return View("Ok", notifyObjOk);
                 //    /* Yöntem-1 */
                 //    bool hasError = false;
                 //    if(model.UserName == "aaa")
@@ -179,12 +187,38 @@ namespace MyEverNote.WebApp.Controllers
         }
         public ActionResult EditProfile()
         {
-            return View();
+            EverNoteUser currentUser = Session["login"] as EverNoteUser;
+            EverNoteUserManager eum = new EverNoteUserManager();
+            BusinessLayerResult<EverNoteUser> res = eum.GetUserById(currentUser.Id);
+            if (res.Errors.Count>0)
+            {
+                //Kullanıcıyı hata ekranına yönlendirir.
+            }
+            return View(res.Result);
         }
         [HttpPost]
-        public ActionResult EditProfile(EverNoteUser user)
+        public ActionResult EditProfile(EverNoteUser user,HttpPostedFileBase ProfileImage)
         {
-            return View();
+            ModelState.Remove("ModifiedUserName");
+            if (ModelState.IsValid)
+            {
+                if (ProfileImage != null &&(ProfileImage.ContentType=="image/jpeg" || ProfileImage.ContentType=="image/jpg" || ProfileImage.ContentType=="image/png" || ProfileImage.ContentType=="image/jfif"))
+                {
+                    string fileName = $"user_{user.Id}.{ProfileImage.ContentType.Split('/')[1]}";
+                    ProfileImage.SaveAs(Server.MapPath($"~/Images/{fileName}"));
+                    user.ProfileImageFileName = fileName;
+                }
+                EverNoteUserManager eum = new EverNoteUserManager();
+                BusinessLayerResult<EverNoteUser> res = eum.UpdateProfile(user);
+                if (res.Errors.Count>0)
+                {
+                    //Kullanıcıyı hata ekranına gönder.
+                }
+                Session["login"] = res.Result;
+                return RedirectToAction("ShowProfile");
+
+            }
+            return View(user);
         }
         public ActionResult RemoveProfile()
         {
